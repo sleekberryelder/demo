@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WikiClone - The Free Encyclopedia</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons (replace with your preferred icon library if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Optional - choose a clean sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+
+    <div class="background-gradient"></div>
+
+    <main class="main-content">
+        <header class="hero-section">
+            <div class="logo-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/220px-Wikipedia-logo-v2.svg.png" alt="Wikipedia Logo" id="wiki-logo" class="wiki-logo">
+            </div>
+            <h1>WIKIPEDIA</h1>
+            <p class="tagline">The Free Encyclopedia</p>
+
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="search" id="search-input" placeholder="Search Wikipedia">
+                    <div class="lang-selector">
+                        <button id="lang-button" title="Select language">EN <i class="fas fa-chevron-down"></i></button>
+                        <!-- Basic Language Dropdown (can be enhanced later) -->
+                        <div class="lang-dropdown">
+                            <a href="#">English</a>
+                            <a href="#">Español</a>
+                            <a href="#">Français</a>
+                            <a href="#">日本語</a>
+                            <a href="#">Deutsch</a>
+                            <a href="#">Русский</a>
+                            <a href="#">中文</a>
+                            <a href="#">Português</a>
+                            <a href="#">Italiano</a>
+                            <a href="#">Polski</a>
+                            <a href="#" class="more-languages">More...</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add handwriting input area -->
+                <div class="handwriting-container">
+                    <div class="handwriting-controls">
+                        <button id="clear-handwriting" title="Clear"><i class="fas fa-eraser"></i></button>
+                        <button id="convert-handwriting" title="Convert to text"><i class="fas fa-magic"></i></button>
+                    </div>
+                    <canvas id="handwriting-canvas"></canvas>
+                    <div id="handwriting-result" class="handwriting-result"></div>
+                </div>
+                 <!-- Live search results will appear here -->
+                <div id="search-results" class="search-results">
+                   <!-- Example item (hidden by default) -->
+                   <!-- <a href="#" class="result-item">
+                        <img src="https://via.placeholder.com/40" alt="">
+                        <div>
+                            <strong>Result Title</strong>
+                            <p>Short description goes here...</p>
+                        </div>
+                    </a> -->
+                </div>
+            </div>
+        </header>
+
+        <section id="dynamic-content" class="dynamic-content">
+             <h2>Discover</h2>
+             <div class="content-grid">
+                <div class="content-card featured-article">
+                    <i class="fas fa-star icon"></i>
+                    <h3>Featured Article</h3>
+                    <p>Explore today's highlighted content.</p>
+                    <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                 <div class="content-card on-this-day">
+                    <i class="fas fa-calendar-alt icon"></i>
+                    <h3>On This Day</h3>
+                    <p>See significant historical events.</p>
+                    <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="content-card random-article">
+                    <i class="fas fa-random icon"></i>
+                    <h3>Random Article</h3>
+                    <p>Dive into something new.</p>
+                    <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                 </div>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <section id="sister-projects" class="sister-projects">
+            <h3>Explore Wikimedia Projects</h3>
+             <div class="projects-grid">
+                <a href="#" class="project-card"> <i class="fas fa-book-open"></i> Wiktionary <p>Free dictionary</p></a>
+                <a href="#" class="project-card"> <i class="fas fa-images"></i> Commons <p>Media collection</p></a>
+                <a href="#" class="project-card"> <i class="fas fa-atlas"></i> Wikivoyage <p>Travel guide</p></a>
+                <a href="#" class="project-card"> <i class="fas fa-quote-left"></i> Wikiquote <p>Quote compendium</p></a>
+                <a href="#" class="project-card"> <i class="fas fa-book"></i> Wikibooks <p>Free textbooks</p></a>
+                 <a href="#" class="project-card"> <i class="fas fa-graduation-cap"></i> Wikiversity <p>Learning resources</p></a>
+                 <a href="#" class="project-card"> <i class="fas fa-newspaper"></i> Wikinews <p>Free news source</p></a>
+                 <a href="#" class="project-card"> <i class="fas fa-dna"></i> Wikispecies <p>Species directory</p></a>
+            </div>
+        </section>
+        <div class="footer-bottom">
+            <p>Wikipedia is hosted by the <a href="#">Wikimedia Foundation</a>, a non-profit organization.</p>
+            <p><a href="#">About</a> | <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Donate</a></p>
+            <div class="app-links">
+                <a href="#" title="Get it on Google Play"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play Store"></a>
+                <a href="#" title="Download on the App Store"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1200px-Download_on_the_App_Store_Badge.svg.png" alt="App Store"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

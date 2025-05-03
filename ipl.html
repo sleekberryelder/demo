@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Premier League - WikiClone</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-gradient"></div>
+
+    <div class="wiki-container">
+        <!-- Left Sidebar -->
+        <aside class="wiki-sidebar">
+            <div class="sidebar-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/220px-Wikipedia-logo-v2.svg.png" alt="Wikipedia Logo">
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Main Page</a></li>
+                    <li><a href="#"><i class="fas fa-random"></i> Random Article</a></li>
+                    <li><a href="#"><i class="fas fa-star"></i> Featured Content</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Current Events</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="wiki-main">
+            <header class="wiki-header">
+                <div class="wiki-title">
+                    <h1>Indian Premier League</h1>
+                    <div class="wiki-actions">
+                        <button class="wiki-button theme-toggle" title="Toggle Dark Mode">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button class="wiki-button"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="wiki-button"><i class="fas fa-history"></i> History</button>
+                        <button class="wiki-button"><i class="fas fa-star"></i> Watch</button>
+                    </div>
+                </div>
+                <div class="wiki-tabs">
+                    <a href="#" class="active">Article</a>
+                    <a href="#">Talk</a>
+                    <a href="#">Read</a>
+                    <a href="#">View Source</a>
+                    <a href="#">View History</a>
+                </div>
+            </header>
+
+            <div class="wiki-content">
+                <div class="ai-summary-box">
+                    <div class="ai-summary-header">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Summary</h3>
+                    </div>
+                    <div class="ai-summary-content">
+                        <p>The Indian Premier League (IPL) is a professional Twenty20 cricket league in India contested during March or April and May of every year by eight teams representing eight different cities in India. The league was founded by the Board of Control for Cricket in India (BCCI) in 2008. It is the most-attended cricket league in the world and ranks sixth among all sports leagues. The IPL has an estimated brand value of $6.2 billion in 2022.</p>
+                    </div>
+                </div>
+
+                <div class="ai-chat-box">
+                    <div class="ai-chat-header">
+                        <i class="fas fa-robot"></i>
+                        <h3>Ask about IPL</h3>
+                    </div>
+                    <div class="ai-chat-messages">
+                        <div class="ai-chat-message">
+                            <p>Hello! I'm your AI assistant for IPL information. Feel free to ask me anything about the Indian Premier League, its teams, players, history, or statistics.</p>
+                        </div>
+                    </div>
+                    <div class="ai-chat-input">
+                        <input type="text" placeholder="Ask me anything about IPL...">
+                        <button><i class="fas fa-paper-plane"></i> Send</button>
+                    </div>
+                </div>
+
+                <div class="content-wrapper">
+                    <div class="table-of-contents">
+                        <h3>Contents</h3>
+                        <ol>
+                            <li><a href="#history">History</a></li>
+                            <li><a href="#teams">Teams</a></li>
+                            <li><a href="#format">Tournament Format</a></li>
+                            <li><a href="#records">Records and Statistics</a></li>
+                            <li><a href="#awards">Awards</a></li>
+                            <li><a href="#broadcasting">Broadcasting</a></li>
+                        </ol>
+                    </div>
+
+                    <article class="wiki-article">
+                        <section id="history" class="article-section">
+                            <h2>History</h2>
+                            <p>The Indian Premier League was founded by the Board of Control for Cricket in India (BCCI) in 2008. The league was created to promote cricket in India and provide a platform for young Indian players to showcase their talent alongside international stars.</p>
+                        </section>
+
+                        <section id="teams" class="article-section">
+                            <h2>Teams</h2>
+                            <div class="teams-grid">
+                                <div class="team-card">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/1200px-Chennai_Super_Kings_Logo.svg.png" alt="CSK">
+                                    <h3>Chennai Super Kings</h3>
+                                    <p>Founded: 2008</p>
+                                </div>
+                                <div class="team-card">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Mumbai_Indians_Logo.svg/1200px-Mumbai_Indians_Logo.svg.png" alt="MI">
+                                    <h3>Mumbai Indians</h3>
+                                    <p>Founded: 2008</p>
+                                </div>
+                                <div class="team-card">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Kolkata_Knight_Riders_Logo.svg/1200px-Kolkata_Knight_Riders_Logo.svg.png" alt="KKR">
+                                    <h3>Kolkata Knight Riders</h3>
+                                    <p>Founded: 2008</p>
+                                </div>
+                                <div class="team-card">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Royal_Challengers_Bangalore_Logo.svg/1200px-Royal_Challengers_Bangalore_Logo.svg.png" alt="RCB">
+                                    <h3>Royal Challengers Bangalore</h3>
+                                    <p>Founded: 2008</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="format" class="article-section">
+                            <h2>Tournament Format</h2>
+                            <p>The IPL follows a round-robin and knockout format. Each team plays every other team twice in the league stage. The top four teams qualify for the playoffs, which consist of two qualifiers, an eliminator, and the final.</p>
+                        </section>
+
+                        <section id="records" class="article-section">
+                            <h2>Records and Statistics</h2>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <h3>Most Runs</h3>
+                                    <p>Virat Kohli - 6,624 runs</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h3>Most Wickets</h3>
+                                    <p>Yuzvendra Chahal - 187 wickets</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h3>Most Titles</h3>
+                                    <p>Mumbai Indians - 5 titles</p>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="wiki-footer">
+        <p>This page was last edited on 3 May 2024</p>
+        <p>Text is available under the <a href="#">Creative Commons Attribution-ShareAlike License</a></p>
+    </footer>
+</body>
+</html> 

@@ -1,4 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Theme Toggle Functionality
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+        themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-theme');
+        const icon = themeToggle.querySelector('i');
+        
+        if (body.classList.contains('dark-theme')) {
+            icon.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            icon.classList.replace('fa-sun', 'fa-moon');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+
     const searchInput = document.getElementById('search-input');
     const searchResultsContainer = document.getElementById('search-results');
     const langButton = document.getElementById('lang-button');
@@ -118,76 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // });
 
 }); // End DOMContentLoaded
-
-// Three.js setup for 3D logo
-const container = document.getElementById('logo-3d');
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ 
-    antialias: true, 
-    alpha: true,
-    powerPreference: "high-performance"
-});
-renderer.setPixelRatio(window.devicePixelRatio); // Use device's pixel ratio
-renderer.setSize(container.clientWidth, container.clientHeight);
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-container.appendChild(renderer.domElement);
-
-// Add better lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-scene.add(ambientLight);
-
-const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
-directionalLight1.position.set(1, 1, 1);
-directionalLight1.castShadow = true;
-scene.add(directionalLight1);
-
-const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
-directionalLight2.position.set(-1, -1, -1);
-scene.add(directionalLight2);
-
-// Load STL model
-const loader = new THREE.STLLoader();
-loader.load('Wikipedia_puzzle_globe_3D_render.stl', function (geometry) {
-    const material = new THREE.MeshPhongMaterial({
-        color: 0xffffff,
-        specular: 0x333333,
-        shininess: 100,
-        flatShading: false,
-        side: THREE.DoubleSide
-    });
-    const mesh = new THREE.Mesh(geometry, material);
-    
-    // Center the model
-    geometry.computeBoundingBox();
-    const center = geometry.boundingBox.getCenter(new THREE.Vector3());
-    mesh.position.sub(center);
-    
-    // Scale the model
-    const scale = 0.5;
-    mesh.scale.set(scale, scale, scale);
-    
-    scene.add(mesh);
-    
-    // Position camera
-    camera.position.z = 2;
-    
-    // Animation
-    function animate() {
-        requestAnimationFrame(animate);
-        mesh.rotation.y += 0.01;
-        renderer.render(scene, camera);
-    }
-    animate();
-});
-
-// Handle window resize
-window.addEventListener('resize', () => {
-    camera.aspect = container.clientWidth / container.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(container.clientWidth, container.clientHeight);
-});
 
 // Handwriting Recognition Setup
 const canvas = document.getElementById('handwriting-canvas');
@@ -394,3 +349,202 @@ function updateContent(langCode) {
     document.querySelector('.sister-projects h3').textContent = content.exploreProjects;
     document.querySelector('.footer-bottom p').textContent = content.hostedBy;
 }
+
+// --- Dynamic Keyword Cloud Background ---
+(function() {
+    console.log('Keyword cloud script running!');
+    const keywords = [
+        'keyword', 'research', 'rank', 'results', 'search', 'market', 'SEO', 'competition', 'step', 'going', 'important', 'find', 'probable', 'business', 'learn', 'global', 'easily', 'searches', 'around', 'want', 'enough', 'chewable', 'together', 'stop', 'just', 'like', 'online', 'world', 'best', 'value', 'work', 'result', 'step', 'around', 'search', 'rank', 'market', 'SEO', 'results', 'research', 'keyword', 'competition', 'business', 'learn', 'find', 'probable', 'important', 'going', 'search', 'market', 'rank', 'results', 'SEO', 'keyword'
+    ];
+    const keywordBg = document.getElementById('keyword-bg');
+    if (!keywordBg) return;
+
+    // Add a visible test keyword from JS
+    const testEl = document.createElement('span');
+    testEl.textContent = 'JS-TEST';
+    testEl.style.position = 'absolute';
+    testEl.style.top = '60px';
+    testEl.style.left = '20px';
+    testEl.style.color = 'blue';
+    testEl.style.fontSize = '2rem';
+    keywordBg.appendChild(testEl);
+
+    const numKeywords = 22;
+    const keywordElements = [];
+    const screenW = window.innerWidth;
+    const screenH = window.innerHeight;
+
+    function randomBetween(a, b) {
+        return a + Math.random() * (b - a);
+    }
+
+    function createKeyword(i) {
+        const el = document.createElement('span');
+        el.className = 'keyword-float';
+        el.textContent = keywords[Math.floor(Math.random() * keywords.length)];
+        keywordBg.appendChild(el);
+        // Randomize initial position and style
+        const fontSize = randomBetween(1.2, 2.8); // rem
+        const top = randomBetween(0, screenH - 40);
+        const left = randomBetween(-screenW, screenW);
+        const speed = randomBetween(0.3, 1.2); // px per frame
+        el.style.fontSize = fontSize + 'rem';
+        el.style.top = top + 'px';
+        el.style.left = left + 'px';
+        el.dataset.speed = speed;
+        el.dataset.fontSize = fontSize;
+        return el;
+    }
+
+    // Create keywords
+    for (let i = 0; i < numKeywords; i++) {
+        keywordElements.push(createKeyword(i));
+    }
+
+    function animateKeywords() {
+        console.log('Animating keywords...');
+        for (let el of keywordElements) {
+            let left = parseFloat(el.style.left);
+            let speed = parseFloat(el.dataset.speed);
+            left += speed;
+            // If out of screen, reset to left
+            if (left > screenW + 100) {
+                el.textContent = keywords[Math.floor(Math.random() * keywords.length)];
+                el.style.left = -200 + 'px';
+                el.style.top = randomBetween(0, screenH - 40) + 'px';
+                el.style.fontSize = randomBetween(1.2, 2.8) + 'rem';
+                el.dataset.speed = randomBetween(0.3, 1.2);
+            } else {
+                el.style.left = left + 'px';
+            }
+        }
+        requestAnimationFrame(animateKeywords);
+    }
+    animateKeywords();
+
+    // Responsive: update positions on resize
+    window.addEventListener('resize', () => {
+        for (let el of keywordElements) {
+            el.style.top = randomBetween(0, window.innerHeight - 40) + 'px';
+        }
+    });
+})();
+
+// --- AI Magic Search Bar Animation ---
+const searchWrapper = document.querySelector('.search-wrapper');
+const searchInputBox = document.getElementById('search-input');
+const sparkleIcon = document.querySelector('.sparkle-icon');
+
+searchInputBox.addEventListener('focus', () => {
+    searchWrapper.classList.add('ai-glow');
+});
+searchInputBox.addEventListener('blur', () => {
+    searchWrapper.classList.remove('ai-glow');
+    searchWrapper.classList.remove('typing');
+});
+searchInputBox.addEventListener('input', () => {
+    if (searchInputBox.value.trim().length > 0) {
+        searchWrapper.classList.add('typing');
+    } else {
+        searchWrapper.classList.remove('typing');
+    }
+});
+
+// Optional: Show a subtle "AI is thinking" animation when searching
+const searchResultsContainer = document.getElementById('search-results');
+function showAIThinking() {
+    if (!searchResultsContainer) return;
+    searchResultsContainer.innerHTML = '<div class="ai-thinking"><span class="dot"></span><span class="dot"></span><span class="dot"></span> <span>AI is thinking…</span></div>';
+    searchResultsContainer.style.display = 'block';
+}
+
+// Add CSS for AI thinking animation
+(function() {
+    const style = document.createElement('style');
+    style.innerHTML = `
+    .ai-thinking {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #8a9bff;
+        font-weight: 500;
+        font-size: 1.1rem;
+        padding: 1.5rem 0;
+        justify-content: center;
+    }
+    .ai-thinking .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #8a9bff;
+        margin-right: 4px;
+        animation: aiDotBlink 1.2s infinite alternate;
+        opacity: 0.5;
+    }
+    .ai-thinking .dot:nth-child(2) { animation-delay: 0.3s; }
+    .ai-thinking .dot:nth-child(3) { animation-delay: 0.6s; }
+    @keyframes aiDotBlink {
+        0% { opacity: 0.5; }
+        100% { opacity: 1; }
+    }
+    `;
+    document.head.appendChild(style);
+})();
+
+// Show AI thinking animation when user types (simulate AI search)
+searchInputBox.addEventListener('input', () => {
+    if (searchInputBox.value.trim().length > 0) {
+        showAIThinking();
+    } else {
+        searchResultsContainer.innerHTML = '';
+        searchResultsContainer.style.display = 'none';
+    }
+});
+
+// Search functionality
+const searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase().trim();
+    
+    // Clear previous results
+    searchResults.innerHTML = '';
+    
+    if (query.length > 0) {
+        // Show search results container
+        searchResults.style.display = 'block';
+        
+        // Check for IPL search
+        if (query === 'ipl' || query === 'indian premier league') {
+            // Create IPL result item
+            const iplResult = document.createElement('a');
+            iplResult.href = 'ipl.html';
+            iplResult.className = 'result-item';
+            iplResult.innerHTML = `
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/1200px-Chennai_Super_Kings_Logo.svg.png" alt="IPL">
+                <div>
+                    <strong>Indian Premier League</strong>
+                    <p>Professional Twenty20 cricket league in India</p>
+                </div>
+            `;
+            searchResults.appendChild(iplResult);
+            
+            // Add click handler to redirect
+            iplResult.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'ipl.html';
+            });
+        }
+        
+        // Add other search results here if needed
+    } else {
+        searchResults.style.display = 'none';
+    }
+});
+
+// Close search results when clicking outside
+document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+    }
+});
